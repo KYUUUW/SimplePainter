@@ -76,6 +76,45 @@ public class DrawingPanel extends JPanel
 	
 	} // drawRectangle()
 	
+	public void drawMyOval(Graphics page, 				//	Oval을 그리는 메소드로서 그리는 메소드를 빼고 나머지는 drawRect 와 다 같음.	
+							Point pt1, 
+							Point pt2, 
+							boolean fill) { 
+		int x, y, width, height; 
+									
+		x = y = width = height = 0;
+
+		
+		if (pt1.x < pt2.x && pt1.y < pt2.y) { 			//	이 과정을 함수로 만들어 버려도 편할거 같은데.
+			x = pt1.x;
+			y = pt1.y;
+			width = pt2.x - pt1.x;
+			height = pt2.y - pt1.y;
+		} else if (pt1.x < pt2.x && pt1.y > pt2.y) { 
+			x = pt1.x;
+			y = pt2.y;
+			width = pt2.x - pt1.x;
+			height = pt1.y - pt2.y;
+		} else if (pt1.x > pt2.x && pt1.y < pt2.y) { 
+			x = pt2.x;
+			y = pt1.y;
+			width = pt1.x - pt2.x;
+			height = pt2.y - pt1.y;
+		} else if (pt1.x > pt2.x && pt1.y > pt2.y) { 
+			x = pt2.x;
+			y = pt2.y;
+			width = pt1.x - pt2.x;
+			height = pt1.y - pt2.y;
+		} // if..else if
+
+		
+		if (fill)
+			page.fillOval(x, y, width, height); 
+		else
+			page.drawOval(x, y, width, height); 
+
+	} // drawMyOval()
+	
 	public void paintComponent(Graphics page) {
 		super.paintComponent(page);				//	오버라이딩 된 객체의 생성자를 불러온다.
 		
@@ -116,6 +155,12 @@ public class DrawingPanel extends JPanel
 								nowData.getFill());
 				break;
 			case DrawConstants.OVAL:
+				page2.setStroke(new BasicStroke(			
+						nowData.getOption()));
+				drawMyOval(	page,						
+						nowData.getPointOne(),		
+						nowData.getPointTwo(),
+						nowData.getFill());
 				break;
 		} // switch
 		
@@ -151,6 +196,12 @@ public class DrawingPanel extends JPanel
 								savedData.getFill());
 					break;
 				case DrawConstants.OVAL:
+					page2.setStroke(new BasicStroke(			
+							savedData.getOption()));
+					drawMyOval(	page,						
+							savedData.getPointOne(),		
+							savedData.getPointTwo(),
+							savedData.getFill());
 					break;
 			} // switch
 		} // for		
