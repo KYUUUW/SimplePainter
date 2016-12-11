@@ -53,6 +53,7 @@ public class PrimaryPanel extends JPanel
 			btnMenuArray[i].addActionListener(menuActionL);
 			buttonMenuPanel.add(btnMenuArray[i]);
 		} // for
+
 		
 		optionMenuPanel = new JPanel();	//	옵션 메뉴 패널 생성
 		optionMenuPanel.setBackground(Color.white);
@@ -156,6 +157,10 @@ public class PrimaryPanel extends JPanel
 					//subOptionMenuPanel.setVisible(true);
 					lblSubOption.setText("Line Width : ");	//	Line, Rect, Oval 은 Line Width가 나와야한다.
 					//chkFill.setVisible(false);
+					break;
+				case DrawConstants.UNDO:
+					drawPanel.deleteLastDrawData();
+					drawPanel.repaint();
 					break;
 				default:
 					subOptionMenuPanel.setVisible(false);	//	위에 해당되지 않으면, subOptionMenuPanel은 안보이게 함.

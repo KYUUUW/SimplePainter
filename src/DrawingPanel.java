@@ -26,6 +26,12 @@ public class DrawingPanel extends JPanel
 		
 	} // DrawingPanel()
 	
+	//ArrayList
+	public void deleteLastDrawData() {
+		int n = dataList.size() - 1;
+		dataList.remove(n);
+	}
+	
 	public void setDrawMode(int mode) {				//	그리기 모드 설정
 		nowData.setDrawMode(mode);					//	drawMode 지정
 		System.out.println("MODE >> " + nowData.getDrawMode());	//	콘솔에 출력
@@ -168,7 +174,8 @@ public class DrawingPanel extends JPanel
 		// savedData
 		for (DrawData savedData : dataList) {				//	전에 그렸던 것을 리스트에서 꺼내서 그려야 한다.
 															//	for( DrawData savedData : dataList)
-															//	이부분 공부 필요함.
+															//	이부분 공부 필요함
+			
 			page.setColor(savedData.getColorSelected());	//	색 세팅하고
 			switch(savedData.getDrawMode()) {				//	DrawMode 비교해서
 				case DrawConstants.DOT:
