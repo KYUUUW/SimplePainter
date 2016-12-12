@@ -18,6 +18,7 @@ public class PrimaryPanel extends JPanel
 	
 	private JPanel			messagePanel;		//	아래 메세지 패널
 	private JLabel 			lblMessage; 
+	private JLabel			lblMessage2;
 	
 	private MenuMouseListener	menuMouseL;		//	메뉴에 마우스 올렸을때의 피드백
 	private MenuActionListener	menuActionL;	//	버튼 메뉴 패널의 컴포넌트들 리스너
@@ -103,6 +104,11 @@ public class PrimaryPanel extends JPanel
 		lblMessage = new JLabel();
 		lblMessage.setBounds(5,10,500,20);
 		messagePanel.add(lblMessage);
+		
+		lblMessage2 = new JLabel();
+		lblMessage2.setBounds(5, 25, 500, 20);
+		messagePanel.add(lblMessage2);
+		
 	} // PrimaryPanel()
 	
 	public int getOption() {								//	포인트 크기 옵션 받는 메소드
@@ -131,6 +137,11 @@ public class PrimaryPanel extends JPanel
 			area = (int)(width*height/4*Math.PI);
 		}
 		lblMessage.setText("length = " + length +", area = " + area);
+		messagePanel.repaint();
+	}
+	
+	public void printMessage2 (Point pt) {
+		lblMessage2.setText("Mouse Point = " + pt.x + " ," + pt.y);
 		messagePanel.repaint();
 	}
 	

@@ -275,12 +275,15 @@ public class DrawingPanel extends JPanel
 				nowData.getDrawMode() == DrawConstants.OVAL) {
 				
 				nowData.setPointTwo(event.getPoint());			//	일단 nowData에 PointTwo 저장해서 실시간으로 그릴 수 있게 함.
+				primary.printMessage2(event.getPoint());
 				repaint();										//	역시 뭔가 그려야 할 땐 repaint(); -> paintComponent 다시 실행하므로 거기 확인해보자.
 				
 				primary.printMessage(nowData.getPointOne(), nowData.getPointTwo(), nowData.getDrawMode());
 			} // if
 		} // mouseDragged()		
-		public void mouseMoved(MouseEvent event) {}
+		public void mouseMoved(MouseEvent event) {
+			primary.printMessage2(event.getPoint());
+		}
 		
 	} // DrawListener class
 	
