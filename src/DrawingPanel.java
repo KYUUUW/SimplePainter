@@ -160,7 +160,6 @@ public class DrawingPanel extends JPanel
 								nowData.getPointOne(),		//	첫점, 끝점, 채우기 유무 파라미터로 넘겨줌.
 								nowData.getPointTwo(),
 								nowData.getFill());
-				page.drawString("Area = " + (nowData.getWidth() * nowData.getHeight()) , nowData.getPointOne().x + 5, nowData.getPointOne().y + 15);
 				break;
 			case DrawConstants.OVAL:
 				page2.setStroke(new BasicStroke(			
@@ -169,8 +168,6 @@ public class DrawingPanel extends JPanel
 						nowData.getPointOne(),		
 						nowData.getPointTwo(),
 						nowData.getFill());
-				page.drawString("Area = " + String.format("%.2f",(nowData.getWidth()/2 * nowData.getHeight()/2 * Math.PI)),
-								nowData.getPointOne().x + 5, nowData.getPointOne().y + 15);
 				break;
 		} // switch
 		
@@ -279,6 +276,8 @@ public class DrawingPanel extends JPanel
 				
 				nowData.setPointTwo(event.getPoint());			//	일단 nowData에 PointTwo 저장해서 실시간으로 그릴 수 있게 함.
 				repaint();										//	역시 뭔가 그려야 할 땐 repaint(); -> paintComponent 다시 실행하므로 거기 확인해보자.
+				
+				primary.printMessage(nowData.getPointOne(), nowData.getPointTwo(), nowData.getDrawMode());
 			} // if
 		} // mouseDragged()		
 		public void mouseMoved(MouseEvent event) {}

@@ -15,7 +15,9 @@ public class PrimaryPanel extends JPanel
 	private JButton			btnColor;			//	색깔 선택 버튼
 	
 	private DrawingPanel	drawPanel;			//	중간에 그림 그리기 패널
+	
 	private JPanel			messagePanel;		//	아래 메세지 패널
+	private JLabel 			lblMessage; 
 	
 	private MenuMouseListener	menuMouseL;		//	메뉴에 마우스 올렸을때의 피드백
 	private MenuActionListener	menuActionL;	//	버튼 메뉴 패널의 컴포넌트들 리스너
@@ -98,6 +100,9 @@ public class PrimaryPanel extends JPanel
 		messagePanel.setBorder(BorderFactory.createMatteBorder(1,0,1,0,Color.red));
 		add(messagePanel);
 		
+		lblMessage = new JLabel();
+		lblMessage.setBounds(5,10,500,20);
+		messagePanel.add(lblMessage);
 	} // PrimaryPanel()
 	
 	public int getOption() {								//	포인트 크기 옵션 받는 메소드
@@ -109,6 +114,25 @@ public class PrimaryPanel extends JPanel
 	public boolean getFill() {			//	Fill이 check 됐는지 받음
 		return chkFill.isSelected();
 	} // getFill()
+	
+	public void printMessage(Point pt1, Point pt2, int mode) {
+		int length = 0, area = 0;
+		int width = (pt1.x - pt2.x) > 0 ? (pt1.x - pt2.x) : -(pt1.x - pt2.x);
+		int height = (pt1.y - pt2.y) > 0 ? (pt1.y - pt2.y) : -(pt1.y - pt2.y);
+
+		if (mode == DrawConstants.LINE) {
+			length = (int)Point.distance(pt1.x, pt1.y,pt2.x, pt2.y);
+			//messagePanel.repaint();
+		} else if (mode == DrawConstants.RECT) {
+			length = width*2 + height*2;
+			area = width*height;
+		} else if (mode == DrawConstants.OVAL) {
+			length = (int)((width + height)/2 * Math.PI) ;
+			area = (int)(width*height/4*Math.PI);
+		}
+		lblMessage.setText("length = " + length +", area = " + area);
+		messagePanel.repaint();
+	}
 	
 	private class MenuMouseListener implements MouseListener
 	{
