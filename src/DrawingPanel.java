@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.math.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.*;
@@ -25,6 +26,12 @@ public class DrawingPanel extends JPanel
 		dataList = new ArrayList<DrawData>();		//	ArrayList도 생성
 		
 	} // DrawingPanel()
+	
+	//ArrayList
+	public void deleteLastDrawData() {
+		int n = dataList.size() - 1;
+		dataList.remove(n);
+	}
 	
 	public void setDrawMode(int mode) {				//	그리기 모드 설정
 		nowData.setDrawMode(mode);					//	drawMode 지정
@@ -153,6 +160,7 @@ public class DrawingPanel extends JPanel
 								nowData.getPointOne(),		//	첫점, 끝점, 채우기 유무 파라미터로 넘겨줌.
 								nowData.getPointTwo(),
 								nowData.getFill());
+				page.drawString("Area = " + (nowData.getWidth() * nowData.getHeight()) , nowData.getPointOne().x + 5, nowData.getPointOne().y + 15);
 				break;
 			case DrawConstants.OVAL:
 				page2.setStroke(new BasicStroke(			
@@ -161,6 +169,8 @@ public class DrawingPanel extends JPanel
 						nowData.getPointOne(),		
 						nowData.getPointTwo(),
 						nowData.getFill());
+				page.drawString("Area = " + String.format("%.2f",(nowData.getWidth()/2 * nowData.getHeight()/2 * Math.PI)),
+								nowData.getPointOne().x + 5, nowData.getPointOne().y + 15);
 				break;
 		} // switch
 		
@@ -168,7 +178,8 @@ public class DrawingPanel extends JPanel
 		// savedData
 		for (DrawData savedData : dataList) {				//	전에 그렸던 것을 리스트에서 꺼내서 그려야 한다.
 															//	for( DrawData savedData : dataList)
-															//	이부분 공부 필요함.
+															//	이부분 공부 필요함
+			
 			page.setColor(savedData.getColorSelected());	//	색 세팅하고
 			switch(savedData.getDrawMode()) {				//	DrawMode 비교해서
 				case DrawConstants.DOT:

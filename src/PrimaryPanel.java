@@ -53,6 +53,7 @@ public class PrimaryPanel extends JPanel
 			btnMenuArray[i].addActionListener(menuActionL);
 			buttonMenuPanel.add(btnMenuArray[i]);
 		} // for
+
 		
 		optionMenuPanel = new JPanel();	//	옵션 메뉴 패널 생성
 		optionMenuPanel.setBackground(Color.white);
@@ -114,7 +115,6 @@ public class PrimaryPanel extends JPanel
 		public void mouseClicked(MouseEvent event) {}
 		public void mousePressed(MouseEvent event) {}
 		public void mouseReleased(MouseEvent event) {}
-		
 		public void mouseEntered(MouseEvent event) {	//	마우스가 컴포넌트에 올려져있을때
 			JButton obj = (JButton)event.getSource();
 			obj.setBackground(Color.cyan);
@@ -156,6 +156,10 @@ public class PrimaryPanel extends JPanel
 					//subOptionMenuPanel.setVisible(true);
 					lblSubOption.setText("Line Width : ");	//	Line, Rect, Oval 은 Line Width가 나와야한다.
 					//chkFill.setVisible(false);
+					break;
+				case DrawConstants.UNDO:
+					drawPanel.deleteLastDrawData();
+					drawPanel.repaint();
 					break;
 				default:
 					subOptionMenuPanel.setVisible(false);	//	위에 해당되지 않으면, subOptionMenuPanel은 안보이게 함.
